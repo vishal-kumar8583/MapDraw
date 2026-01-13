@@ -1,0 +1,529 @@
+.app {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* Safe area insets for devices with notches */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+.search-overlay {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* Reposition zoom controls to bottom-right */
+.leaflet-control-zoom {
+  position: absolute !important;
+  bottom: 30px !important;
+  right: 20px !important;
+  top: auto !important;
+  left: auto !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  backdrop-filter: blur(20px) !important;
+  animation: zoomControlFadeIn 0.5s ease-out !important;
+}
+
+@keyframes zoomControlFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.leaflet-control-zoom a {
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #374151 !important;
+  border: none !important;
+  width: 44px !important;
+  height: 44px !important;
+  line-height: 44px !important;
+  font-size: 20px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  backdrop-filter: blur(10px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.leaflet-control-zoom a:hover {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+  color: white !important;
+  transform: scale(1.05) !important;
+  box-shadow: 
+    0 4px 12px rgba(59, 130, 246, 0.3) !important,
+    0 0 20px rgba(59, 130, 246, 0.2) !important;
+}
+
+.leaflet-control-zoom a:active {
+  transform: scale(0.95) !important;
+}
+
+.leaflet-control-zoom a:first-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
+}
+
+.leaflet-control-zoom-in {
+  border-radius: 12px 12px 0 0 !important;
+}
+
+.leaflet-control-zoom-out {
+  border-radius: 0 0 12px 12px !important;
+}
+
+/* Drawing mode cursor */
+.leaflet-container.leaflet-crosshair {
+  cursor: crosshair !important;
+}
+
+/* Drawing feedback */
+.leaflet-draw-tooltip {
+  background: rgba(0, 0, 0, 0.8) !important;
+  border: none !important;
+  border-radius: 6px !important;
+  color: white !important;
+  font-size: 12px !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+.leaflet-draw-tooltip-single {
+  margin-top: -12px !important;
+}
+
+.leaflet-draw-tooltip-subtext {
+  color: #ccc !important;
+  font-size: 10px !important;
+}
+
+/* Drawing guides */
+.leaflet-draw-guide-dash {
+  stroke-dasharray: 5,5 !important;
+  stroke: #666 !important;
+  stroke-width: 2 !important;
+  opacity: 0.6 !important;
+}
+
+/* Drawing vertices */
+.leaflet-editing-icon {
+  background: #fff !important;
+  border: 2px solid #3b82f6 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+.leaflet-touch-icon {
+  background: #3b82f6 !important;
+  border: 3px solid #fff !important;
+}
+
+/* Modern popup styling */
+.leaflet-popup-content-wrapper {
+  background: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-tip {
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0) !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.modern-popup .leaflet-popup-close-button {
+  color: #6b7280 !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+  padding: 8px !important;
+  top: 8px !important;
+  right: 8px !important;
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.2s ease !important;
+}
+
+.modern-popup .leaflet-popup-close-button:hover {
+  background: #ef4444 !important;
+  color: white !important;
+  transform: scale(1.1) !important;
+}
+
+/* Feature layer hover effects */
+.feature-layer {
+  transition: all 0.3s ease !important;
+  cursor: pointer !important;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .search-overlay {
+    top: 25px;
+    right: 25px;
+  }
+  
+  .leaflet-control-zoom {
+    bottom: 35px !important;
+    right: 25px !important;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .search-overlay {
+    top: 20px;
+    right: 20px;
+    left: 20px;
+    max-width: calc(100vw - 40px);
+  }
+  
+  .leaflet-control-zoom {
+    bottom: 30px !important;
+    right: 20px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 42px !important;
+    height: 42px !important;
+    line-height: 42px !important;
+    font-size: 19px !important;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 481px) {
+  .search-overlay {
+    top: 15px;
+    right: 15px;
+    left: 15px;
+    max-width: calc(100vw - 30px);
+  }
+  
+  .leaflet-control-zoom {
+    bottom: 25px !important;
+    right: 15px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 40px !important;
+    height: 40px !important;
+    line-height: 40px !important;
+    font-size: 18px !important;
+  }
+  
+  .leaflet-draw-tooltip {
+    font-size: 11px !important;
+    padding: 6px 10px !important;
+  }
+}
+
+@media (max-width: 480px) and (min-width: 376px) {
+  .search-overlay {
+    top: 12px;
+    right: 12px;
+    left: 12px;
+    max-width: calc(100vw - 24px);
+  }
+  
+  .leaflet-control-zoom {
+    bottom: 20px !important;
+    right: 12px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 38px !important;
+    height: 38px !important;
+    line-height: 38px !important;
+    font-size: 17px !important;
+  }
+  
+  .leaflet-draw-tooltip {
+    font-size: 10px !important;
+    padding: 5px 8px !important;
+  }
+  
+  .measurement-tooltip {
+    font-size: 11px !important;
+    padding: 6px 8px !important;
+  }
+  
+  .shape-label {
+    font-size: 9px;
+    padding: 2px 6px;
+    min-width: 20px;
+  }
+}
+
+@media (max-width: 375px) {
+  .search-overlay {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    max-width: calc(100vw - 20px);
+  }
+  
+  .leaflet-control-zoom {
+    bottom: 15px !important;
+    right: 10px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 36px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+    font-size: 16px !important;
+  }
+  
+  .leaflet-draw-tooltip {
+    font-size: 9px !important;
+    padding: 4px 6px !important;
+  }
+  
+  .measurement-tooltip {
+    font-size: 10px !important;
+    padding: 5px 6px !important;
+  }
+  
+  .shape-label {
+    font-size: 8px;
+    padding: 2px 4px;
+    min-width: 18px;
+  }
+}
+
+@media (max-width: 319px) {
+  .search-overlay {
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    max-width: calc(100vw - 16px);
+  }
+  
+  .leaflet-control-zoom {
+    bottom: 12px !important;
+    right: 8px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 34px !important;
+    height: 34px !important;
+    line-height: 34px !important;
+    font-size: 15px !important;
+  }
+  
+  .leaflet-draw-tooltip {
+    font-size: 8px !important;
+    padding: 3px 5px !important;
+  }
+  
+  .measurement-tooltip {
+    font-size: 9px !important;
+    padding: 4px 5px !important;
+  }
+  
+  .shape-label {
+    font-size: 7px;
+    padding: 1px 3px;
+    min-width: 16px;
+  }
+}
+
+/* Landscape Mobile Orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+  .search-overlay {
+    top: 8px;
+    right: 8px;
+    left: auto;
+    max-width: 250px;
+  }
+  
+  .leaflet-control-zoom {
+    bottom: 10px !important;
+    right: 8px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    width: 32px !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    font-size: 14px !important;
+  }
+  
+  .leaflet-draw-tooltip {
+    font-size: 8px !important;
+    padding: 3px 5px !important;
+  }
+  
+  .shape-label {
+    font-size: 7px;
+    padding: 1px 3px;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .leaflet-control-zoom {
+    border-width: 0.5px !important;
+  }
+  
+  .leaflet-control-zoom a {
+    border-width: 0.5px !important;
+  }
+  
+  .shape-label {
+    border-width: 1px;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .leaflet-control-zoom a {
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  
+  .leaflet-draw-tooltip {
+    font-size: 12px !important;
+    padding: 8px 12px !important;
+  }
+}
+/* Measurement tooltips */
+.measurement-tooltip {
+  background: rgba(0, 0, 0, 0.9) !important;
+  border: none !important;
+  border-radius: 8px !important;
+  color: white !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  padding: 8px 12px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+  backdrop-filter: blur(10px) !important;
+  white-space: nowrap !important;
+}
+
+.measurement-tooltip::before {
+  border-top-color: rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Animation for measurement panel */
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.measurements-panel {
+  animation: slideInFromRight 0.3s ease-out;
+}
+/* Shape label markers */
+.shape-label-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.shape-label {
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 900;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  white-space: nowrap;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  color: #ffffff !important;
+  text-shadow: 
+    0 1px 2px rgba(0, 0, 0, 0.8),
+    0 0 4px rgba(0, 0, 0, 0.6),
+    1px 1px 2px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Shape label animations */
+.shape-label {
+  animation: labelFadeIn 0.3s ease-out;
+}
+
+@keyframes labelFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Responsive label sizing */
+@media (max-width: 768px) {
+  .shape-label {
+    font-size: 10px;
+    padding: 3px 6px;
+    min-width: 20px;
+  }
+}
+
+/* Hide Leaflet attribution completely */
+.leaflet-control-attribution {
+  display: none !important;
+}
+
+.leaflet-bottom.leaflet-right {
+  display: none !important;
+}
+
+/* Slide Transition Animations */
+.main-app {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transform: translateX(100%);
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 5000;
+}
+
+.main-app.slide-in {
+  transform: translateX(0);
+}
+
+/* Spin animation for loading indicator */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

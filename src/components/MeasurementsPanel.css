@@ -1,0 +1,1149 @@
+.measurements-panel {
+  /* Positioning is now handled in the toggle button CSS section */
+}
+
+.measurements-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 16px 20px;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.measurements-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.measurements-content {
+  max-height: calc(100vh - 200px);
+  overflow-y: auto;
+  overflow-x: visible;
+  padding: 0;
+}
+
+.measurement-item {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.measurement-item:last-child {
+  border-bottom: none;
+}
+
+.measurement-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding: 0 2px;
+}
+
+.shape-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.shape-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.shape-icon.shape-polygon svg {
+  color: #3b82f6;
+}
+
+.shape-icon.shape-rectangle svg {
+  color: #10b981;
+}
+
+.shape-icon.shape-circle svg {
+  color: #ef4444;
+}
+
+.shape-icon.shape-lineString svg {
+  color: #8b5cf6;
+}
+
+.shape-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+}
+
+.measurement-summary {
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #4f46e5;
+  text-align: center;
+}
+
+.measurement-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.measurement-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.measurement-label {
+  color: #6b7280;
+  font-weight: 500;
+  flex-shrink: 0;
+  min-width: 70px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.measurement-label svg {
+  width: 14px;
+  height: 14px;
+}
+
+.measurement-value {
+  color: #374151;
+  font-weight: 500;
+  text-align: right;
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+/* Scrollbar styling */
+.measurements-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.measurements-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.measurements-content::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+.measurements-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .measurements-panel {
+    width: calc(100vw - 40px);
+    right: 20px;
+    left: 20px;
+    top: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .measurements-panel {
+    width: calc(100vw - 20px);
+    right: 10px;
+    left: 10px;
+    top: 60px;
+  }
+  
+  .measurement-row {
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .measurement-value {
+    text-align: left;
+  }
+}
+/* Editable name styles */
+.shape-name-container {
+  flex: 1;
+  position: relative;
+}
+
+.editable-name {
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  background: rgba(59, 130, 246, 0.1);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  font-weight: 600;
+  color: #1e40af;
+  min-width: 120px;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+}
+
+.editable-name:hover {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.edit-icon {
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  background: rgba(59, 130, 246, 0.3);
+  padding: 3px 5px;
+  border-radius: 4px;
+  animation: editIconPulse 2s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.editable-name:hover .edit-icon {
+  opacity: 1;
+  background: rgba(59, 130, 246, 0.5);
+  transform: scale(1.2);
+  animation: none;
+}
+
+@keyframes editIconPulse {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.name-edit-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.name-edit-input {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 8px;
+  border: 1px solid #3b82f6;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e40af;
+  background: white;
+  outline: none;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.1);
+  animation: inputFocus 0.3s ease-out;
+  box-sizing: border-box;
+  height: 24px;
+}
+
+.name-edit-input:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.2);
+  transform: none;
+}
+
+@keyframes inputFocus {
+  from {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.name-edit-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.name-save-btn,
+.name-cancel-btn {
+  width: 24px;
+  height: 24px;
+  border: 1px solid white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.name-save-btn {
+  background: #10b981;
+  color: white;
+}
+
+.name-save-btn:hover {
+  background: #059669;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.name-save-btn:active {
+  transform: scale(1.05);
+}
+
+.name-cancel-btn {
+  background: #ef4444;
+  color: white;
+}
+
+.name-cancel-btn:hover {
+  background: #dc2626;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+}
+
+.name-cancel-btn:active {
+  transform: scale(1.05);
+}
+
+/* Shape order indicator */
+.shape-order-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #3b82f6;
+  color: white;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  min-width: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
+}
+/* Enhanced visibility for editable names */
+.editable-name::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  border-radius: 10px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  animation: borderGlow 3s ease-in-out infinite;
+}
+
+.editable-name:hover::before {
+  opacity: 0.3;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.2; }
+}
+
+/* Pulsing edit hint */
+.editable-name::after {
+  content: 'Click to edit';
+  position: fixed;
+  top: auto;
+  bottom: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.95);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.editable-name:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(40px);
+}
+
+/* Make the entire measurement item more prominent when name is being edited */
+.measurement-item:has(.name-edit-container) {
+  background: rgba(59, 130, 246, 0.05);
+  border: 2px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.15);
+  transform: scale(1.02);
+}
+
+/* Enhanced name edit container */
+.name-edit-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 4px;
+  border-radius: 8px;
+  border: 2px solid #3b82f6;
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2);
+  margin: 2px 0;
+  max-width: calc(100% - 4px);
+  width: 100%;
+}
+/* Enhanced button visibility */
+.name-edit-buttons {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Reduce animation intensity */
+.name-save-btn {
+  animation: saveButtonPulse 3s ease-in-out infinite;
+}
+
+.name-cancel-btn {
+  animation: cancelButtonPulse 3s ease-in-out infinite 1s;
+}
+
+@keyframes saveButtonPulse {
+  0%, 100% { 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  50% { 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 12px rgba(16, 185, 129, 0.3);
+  }
+}
+
+@keyframes cancelButtonPulse {
+  0%, 100% { 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+  50% { 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 12px rgba(239, 68, 68, 0.3);
+  }
+}
+
+/* Make sure the symbols are clearly visible */
+.name-save-btn::before {
+  content: '✓';
+  font-size: 12px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.name-cancel-btn::before {
+  content: '✕';
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+/* Remove the text content and use pseudo-elements instead */
+.name-save-btn,
+.name-cancel-btn {
+  font-size: 0; /* Hide any text content */
+}
+/* Measurements Panel Toggle Button */
+.measurements-toggle {
+  position: fixed;
+  top: 80px; /* Align with measurements panel top */
+  right: 350px; /* Position just to the left of the panel */
+  z-index: 1002;
+  width: 36px; /* Smaller size for better integration */
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 6px 20px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(102, 126, 234, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(30px);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: measurementsTogglePulse 3s ease-in-out infinite;
+}
+
+.measurements-toggle.collapsed {
+  right: 20px; /* Move to screen edge when collapsed */
+  top: 80px;
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 
+    0 6px 20px rgba(16, 185, 129, 0.4),
+    0 0 0 1px rgba(16, 185, 129, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  animation: measurementsToggleGlow 2s ease-in-out infinite;
+}
+
+.measurements-toggle.expanded {
+  right: 350px; /* Stay close to panel when expanded */
+  top: 80px;
+}
+
+.measurements-toggle:hover {
+  transform: scale(1.15) rotate(-5deg);
+  box-shadow: 
+    0 8px 25px rgba(102, 126, 234, 0.6),
+    0 0 25px rgba(102, 126, 234, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: linear-gradient(135deg, #5a67d8, #6b46c1);
+  animation: none;
+}
+
+.measurements-toggle.collapsed:hover {
+  background: linear-gradient(135deg, #059669, #047857);
+  box-shadow: 
+    0 8px 25px rgba(16, 185, 129, 0.6),
+    0 0 25px rgba(16, 185, 129, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.measurements-toggle:active {
+  transform: scale(0.98) rotate(2deg);
+  transition: transform 0.1s ease;
+}
+
+.measurements-toggle-icon {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+.measurements-toggle-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* Measurements Toggle Animations */
+@keyframes measurementsTogglePulse {
+  0%, 100% { 
+    box-shadow: 
+      0 6px 20px rgba(102, 126, 234, 0.4),
+      0 0 0 1px rgba(102, 126, 234, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 
+      0 6px 20px rgba(102, 126, 234, 0.6),
+      0 0 15px rgba(102, 126, 234, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes measurementsToggleGlow {
+  0%, 100% { 
+    box-shadow: 
+      0 6px 20px rgba(16, 185, 129, 0.4),
+      0 0 0 1px rgba(16, 185, 129, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 
+      0 6px 20px rgba(16, 185, 129, 0.6),
+      0 0 15px rgba(16, 185, 129, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transform: scale(1.03);
+  }
+}
+
+/* Floating animation when expanded */
+.measurements-toggle.expanded {
+  right: 350px;
+  top: 80px;
+  animation: measurementsToggleFloat 4s ease-in-out infinite;
+}
+
+@keyframes measurementsToggleFloat {
+  0%, 100% { 
+    transform: translateX(0px);
+  }
+  50% { 
+    transform: translateX(-3px);
+  }
+}
+
+/* Shimmer effect on the measurements toggle button */
+.measurements-toggle::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: measurementsShimmer 3s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes measurementsShimmer {
+  0%, 100% { 
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  50% { 
+    opacity: 1;
+    transform: rotate(180deg);
+  }
+}
+
+/* Panel positioning */
+.measurements-panel {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  width: 320px;
+  max-height: calc(100vh - 120px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: 1000;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hidden state */
+.measurements-panel.hidden {
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Remove the old panel positioning since it's now in the main CSS */
+.measurements-panel {
+  /* Positioning moved to main CSS above */
+}
+
+/* Smooth transition for panel */
+/* Already defined above */
+
+/* Animation for toggle button icon */
+/* Already defined above */
+
+/* Remove old animations */
+
+/* Enhanced Responsive Design for Measurements Panel */
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+  .measurements-panel {
+    width: 360px;
+    top: 90px;
+    right: 30px;
+  }
+  
+  .measurements-toggle {
+    width: 40px;
+    height: 40px;
+    top: 90px;
+    right: 400px;
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 30px;
+  }
+  
+  .panel-header {
+    padding: 24px;
+  }
+  
+  .panel-title {
+    font-size: 20px;
+  }
+}
+
+/* Desktop (1024px - 1439px) */
+@media (max-width: 1439px) and (min-width: 1024px) {
+  .measurements-panel {
+    width: 340px;
+    top: 85px;
+    right: 25px;
+  }
+  
+  .measurements-toggle {
+    width: 38px;
+    height: 38px;
+    top: 85px;
+    right: 375px;
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 25px;
+  }
+}
+
+/* Tablet Landscape (768px - 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .measurements-panel {
+    width: 320px;
+    top: 80px;
+    right: 20px;
+  }
+  
+  .measurements-toggle {
+    width: 36px;
+    height: 36px;
+    top: 80px;
+    right: 350px;
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 20px;
+  }
+  
+  .measurement-item {
+    padding: 14px;
+  }
+  
+  .measurement-name {
+    font-size: 13px;
+  }
+  
+  .measurement-value {
+    font-size: 12px;
+  }
+}
+
+/* Tablet Portrait & Mobile Large (481px - 767px) */
+@media (max-width: 767px) and (min-width: 481px) {
+  .measurements-panel {
+    width: calc(100vw - 30px);
+    max-width: 400px;
+    right: 15px;
+    left: 15px;
+    top: 70px;
+  }
+  
+  .measurements-toggle {
+    width: 34px;
+    height: 34px;
+    top: 70px;
+    right: calc(100vw - 50px);
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 15px;
+  }
+  
+  .measurements-toggle.expanded {
+    right: calc(100vw - 50px);
+  }
+  
+  .panel-header {
+    padding: 18px;
+  }
+  
+  .panel-title {
+    font-size: 17px;
+  }
+  
+  .measurement-item {
+    padding: 12px;
+  }
+  
+  .measurement-name {
+    font-size: 12px;
+  }
+  
+  .measurement-value {
+    font-size: 11px;
+  }
+  
+  .name-edit-input {
+    font-size: 12px;
+    height: 22px;
+  }
+  
+  .name-save-btn,
+  .name-cancel-btn {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Mobile Large (376px - 480px) */
+@media (max-width: 480px) and (min-width: 376px) {
+  .measurements-panel {
+    width: calc(100vw - 24px);
+    right: 12px;
+    left: 12px;
+    top: 65px;
+    max-height: calc(100vh - 100px);
+  }
+  
+  .measurements-toggle {
+    width: 32px;
+    height: 32px;
+    top: 65px;
+    right: calc(100vw - 45px);
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 12px;
+  }
+  
+  .measurements-toggle.expanded {
+    right: calc(100vw - 45px);
+  }
+  
+  .measurements-toggle:hover {
+    transform: scale(1.1) rotate(-2deg);
+  }
+  
+  .panel-header {
+    padding: 16px;
+  }
+  
+  .panel-title {
+    font-size: 16px;
+  }
+  
+  .panel-icon {
+    font-size: 18px;
+  }
+  
+  .measurement-item {
+    padding: 10px;
+  }
+  
+  .measurement-name {
+    font-size: 11px;
+  }
+  
+  .measurement-value {
+    font-size: 10px;
+  }
+  
+  .name-edit-input {
+    font-size: 11px;
+    height: 20px;
+    padding: 3px 6px;
+  }
+  
+  .name-save-btn,
+  .name-cancel-btn {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .name-save-btn::before {
+    font-size: 10px;
+  }
+  
+  .name-cancel-btn::before {
+    font-size: 8px;
+  }
+  
+  .shape-order-badge {
+    font-size: 9px;
+    padding: 1px 4px;
+  }
+}
+
+/* Mobile Small (320px - 375px) */
+@media (max-width: 375px) {
+  .measurements-panel {
+    width: calc(100vw - 20px);
+    right: 10px;
+    left: 10px;
+    top: 60px;
+    max-height: calc(100vh - 90px);
+  }
+  
+  .measurements-toggle {
+    width: 30px;
+    height: 30px;
+    top: 60px;
+    right: calc(100vw - 42px);
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 10px;
+  }
+  
+  .measurements-toggle.expanded {
+    right: calc(100vw - 42px);
+  }
+  
+  .panel-header {
+    padding: 14px;
+  }
+  
+  .panel-title {
+    font-size: 15px;
+  }
+  
+  .panel-icon {
+    font-size: 16px;
+  }
+  
+  .measurement-item {
+    padding: 8px;
+  }
+  
+  .measurement-name {
+    font-size: 10px;
+  }
+  
+  .measurement-value {
+    font-size: 9px;
+  }
+  
+  .name-edit-container {
+    padding: 3px;
+  }
+  
+  .name-edit-input {
+    font-size: 10px;
+    height: 18px;
+    padding: 2px 4px;
+  }
+  
+  .name-save-btn,
+  .name-cancel-btn {
+    width: 18px;
+    height: 18px;
+  }
+  
+  .name-save-btn::before {
+    font-size: 9px;
+  }
+  
+  .name-cancel-btn::before {
+    font-size: 7px;
+  }
+  
+  .shape-order-badge {
+    font-size: 8px;
+    padding: 1px 3px;
+    top: -3px;
+    right: -3px;
+  }
+  
+  .edit-icon {
+    padding: 2px 3px;
+  }
+  
+  .edit-icon svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media (max-width: 319px) {
+  .measurements-panel {
+    width: calc(100vw - 16px);
+    right: 8px;
+    left: 8px;
+    top: 55px;
+    max-height: calc(100vh - 80px);
+  }
+  
+  .measurements-toggle {
+    width: 28px;
+    height: 28px;
+    top: 55px;
+    right: calc(100vw - 38px);
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 8px;
+  }
+  
+  .measurements-toggle.expanded {
+    right: calc(100vw - 38px);
+  }
+  
+  .panel-header {
+    padding: 12px;
+  }
+  
+  .panel-title {
+    font-size: 14px;
+  }
+  
+  .panel-icon {
+    font-size: 15px;
+  }
+  
+  .measurement-item {
+    padding: 6px;
+  }
+  
+  .measurement-name {
+    font-size: 9px;
+  }
+  
+  .measurement-value {
+    font-size: 8px;
+  }
+  
+  .name-edit-input {
+    font-size: 9px;
+    height: 16px;
+  }
+  
+  .name-save-btn,
+  .name-cancel-btn {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Landscape Mobile Orientation */
+@media (max-height: 500px) and (orientation: landscape) {
+  .measurements-panel {
+    top: 8px;
+    right: 8px;
+    width: 280px;
+    max-height: calc(100vh - 16px);
+  }
+  
+  .measurements-toggle {
+    width: 28px;
+    height: 28px;
+    top: 8px;
+    right: 295px;
+  }
+  
+  .measurements-toggle.collapsed {
+    right: 8px;
+  }
+  
+  .panel-header {
+    padding: 12px;
+  }
+  
+  .panel-title {
+    font-size: 14px;
+  }
+  
+  .measurement-item {
+    padding: 8px;
+  }
+  
+  .measurement-name {
+    font-size: 11px;
+  }
+  
+  .measurement-value {
+    font-size: 10px;
+  }
+  
+  .name-edit-input {
+    height: 18px;
+    font-size: 10px;
+  }
+  
+  .name-save-btn,
+  .name-cancel-btn {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* High DPI Displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .measurements-toggle {
+    border-width: 1px; /* Thinner borders on high DPI */
+  }
+  
+  .name-edit-input {
+    border-width: 1px;
+  }
+  
+  .measurement-item {
+    border-width: 1px;
+  }
+}
+
+/* Touch device optimizations */
+@media (pointer: coarse) {
+  .measurements-toggle {
+    min-width: 44px; /* Minimum touch target size */
+    min-height: 44px;
+  }
+  
+  .name-save-btn,
+  .name-cancel-btn {
+    min-width: 24px;
+    min-height: 24px;
+  }
+  
+  .editable-name {
+    min-height: 32px; /* Larger touch target */
+  }
+}
+/* Tooltip arrow - pointing up since tooltip is below */
+.editable-name:hover::before {
+  content: '';
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%) translateY(32px);
+  border: 6px solid transparent;
+  border-bottom-color: rgba(0, 0, 0, 0.95);
+  opacity: 1;
+  transition: all 0.3s ease;
+  z-index: 9998;
+}
+
+.editable-name::before {
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+/* Better positioning for the measurement item container */
+.measurement-item {
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+}
+
+.measurement-item:hover {
+  z-index: 10;
+}
